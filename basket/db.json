@@ -1,0 +1,12 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "productName": "A71",
+      "brand":"Samsung",
+      "isStock": 44,
+      "price":333,
+      "discount":30
+    }
+  ]
+}
