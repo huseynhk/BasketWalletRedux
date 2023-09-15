@@ -18,8 +18,8 @@ const store = configureStore({
   reducer: {
     persistedReducer,
   },
-  middleware: [],
   devTools: true,
+  middleware:[]
 });
 const persistor = persistStore(store);
 

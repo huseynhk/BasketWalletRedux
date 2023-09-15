@@ -5,6 +5,7 @@ export const initialState = {
   amount: 0,
   totalAmount: 0,
   totalPrice: 0,
+  filteredBasket: [],
 };
 export const basketSlice = createSlice({
   name: "basket",
@@ -74,9 +75,37 @@ export const basketSlice = createSlice({
       state.totalAmount = 0;
       state.totalPrice = 0;
     },
+
+    filterProduct: (state, action) => {
+      const searchTerm = action.payload.toLowerCase();
+      state.filteredBasket = state.basket.filter((product) => {
+        return (
+          product.title.toLowerCase().includes(searchTerm) ||
+          product.category.toLowerCase().includes(searchTerm)
+        );
+      });
+    },
+
+    sortData: (state, action) => {
+      state.filteredBasket = state.basket.sort((a, b) => {
+        if (action.payload === "title" || action.payload === "category") {
+          return a[action.payload].localeCompare(b[action.payload]);
+        } else if (action.payload === "price" || action.payload === "rating") {
+          return a[action.payload] - b[action.payload];
+        }
+      });
+    },
+
   },
 });
 
-export const { addToCart, removeFromCart, increament, decrement , clearBasket} =
-  basketSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  increament,
+  decrement,
+  clearBasket,
+  filterProduct,
+  sortData,
+} = basketSlice.actions;
 export default basketSlice.reducer;
